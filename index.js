@@ -6,14 +6,8 @@ const cTable = require("console.table");
 
 var connection = mysql.createConnection({
   host: "localhost",
-
-  // Your port; if not 3306
   port: 3306,
-
-  // Your username
   user: "root",
-
-  // Your password
   password: "Raina10!",
   database: "employeecms_db",
 });
@@ -24,28 +18,30 @@ connection.connect(function (err) {
   //   connection.end();
 });
 
-const promptUser = () => {
-  return inquirer.prompt([
-    {
-      type: "list",
-      name: "input",
-      message: "What would you like to do?",
-      choices: [
-        "View All Employees",
-        "View All Employees by Department",
-        "View All Employees by Manager",
-        "Add Employee",
-        "Remove Employee",
-        "Update Employee",
-        "Update Employee Role",
-        "Update Employee Manager",
-      ],
-    }.then((response) => {
+const promptStart = () => {
+  return inquirer
+    .prompt([
+      {
+        type: "list",
+        name: "input",
+        message: "What would you like to do?",
+        choices: [
+          "View All Employees",
+          "View All Employees by Department",
+          "View All Employees by Manager",
+          "Add Employee",
+          "Remove Employee",
+          "Update Employee",
+          "Update Employee Role",
+          "Update Employee Manager",
+        ],
+      },
+    ])
+    .then((response) => {
       if (response.uerAction === "View All Employees") {
         selectAll();
       }
-    }),
-  ]);
+    });
 };
 
 const selectAll = () => {
